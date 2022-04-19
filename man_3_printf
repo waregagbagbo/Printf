@@ -1,0 +1,55 @@
+.TH _PRINTF "1" "18 April 2022" "0x11" "_printf man page"
+.SH NAME
+_printf - print data and format
+.SH SYNOPSIS
+.B printf FORMAT [ARGUMENT]...
+.SH DESCRIPTION
+Prints ARGUMENT(s) based on FORMAT
+
+If format includes format specifiers (subsequences beginning with %), the additional arguments following format are formatted and inserted in the resulting string replacing their respective specifiers.
+
+_printf will also take an indefinite amount of arguments.
+
+Example:
+_printf("%s", text);
+
+In the Example print the value of text with %s give the format of text.
+
+.B The conversion specifiers
+.sp
+.B S
+- Prints a string, but non-printable characters are printed this way: \\x, followed by the ASCII code value in uppercase hexadecimal.
+.sp
+.B p
+- Prints an address, given by a pointer variable
+.sp
+.B Flag characters for conversion specifiers
+.sp
+.B +
+- Prints a plus sign in front of positive signed integers and a minus sign in front of negative signed integers.
+ + overrides a space when both flags are given.
+.sp
+.B ' '
+- Prints a space in front of signed integers.
+.sp
+.B #
+
+.IP %c
+- prints character.
+.IP %s
+- prints string.
+.IP %%
+- prints percentage symbol.
+.IP %d
+- prints decimal.
+.IP %i
+- prints integer number.
+_printf uses a custom character printing function called _putchar, that uses the system call write(). 
+_putchar uses a static buffer of 1024 bytes and a static incrementing variable. 
+That way, everytime _putchar is called inside _printf, the character is stored inside the buffer and the function moves to the next character, 
+until _printf calls _putchar(-1), which \(dqflushes\(dq the buffer and resets the incrementing variable to 0. 
+That way, _putchar only needs to call write one time, passing to it the whole buffer and the number of bytes in it, which is given by the value of the incrementing variable
+.SH SEE ALSO
+.I printf (3)
+.SH AUTHOR
+Kirimi Makena Faith  and Warega Gabel
